@@ -52,6 +52,12 @@ RUN apt update && apt install -y --no-install-recommends \
     clangd-18 \
     lldb-18
 
+# # cuda toolkit
+# RUN wget https://developer.download.nvidia.com/compute/cuda/repos/ubuntu2204/x86_64/cuda-keyring_1.1-1_all.deb -O /tmp/cuda-keyring.deb && \
+#     dpkg -i /tmp/cuda-keyring.deb && \
+#     rm -f /tmp/cuda-keyring.deb
+# RUN apt update && apt install -y cuda-toolkit
+
 RUN apt clean && rm -rf /var/lib/apt/lists/*
 
 # set the time zone
@@ -72,9 +78,6 @@ RUN mkdir /var/run/sshd && \
 USER ryukk
 WORKDIR /home/ryukk
 
-# install zoxide
-RUN curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
-
 # configure user ssh and expose SSH service port
 COPY --chown=ryukk:ryukk config/home/ryukk/.ssh .ssh
 COPY --chown=ryukk:ryukk config/home/ryukk/.zshrc .zshrc
@@ -83,6 +86,9 @@ COPY --chown=ryukk:ryukk config/home/ryukk/.efficient_scripts.sh .efficient_scri
 COPY --chown=ryukk:ryukk config/home/ryukk/.zimrc .zimrc
 COPY --chown=ryukk:ryukk config/home/ryukk/.tmux.conf .tmux.conf
 COPY --chown=ryukk:ryukk config/home/ryukk/.config .config
+COPY --chown=ryukk:ryukk config/home/ryukk/init.sh init.sh
+
+RUN bash init.sh
 
 USER root
 # COPY init_script.sh /etc/init.d/
