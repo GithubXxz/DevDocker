@@ -75,13 +75,16 @@ RUN mkdir /var/run/sshd && \
 USER ryukk
 WORKDIR /home/ryukk
 
+# install zoxide
+RUN curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+
 # configure user ssh and expose SSH service port
-COPY --chown=ryukk:ryukk config/home/ryukk/.ssh .ssh
 COPY --chown=ryukk:ryukk config/home/ryukk/.zshrc .zshrc
 COPY --chown=ryukk:ryukk config/home/ryukk/.vimrc .vimrc
 COPY --chown=ryukk:ryukk config/home/ryukk/.efficient_scripts.sh .efficient_scripts.sh
 COPY --chown=ryukk:ryukk config/home/ryukk/.zimrc .zimrc
 COPY --chown=ryukk:ryukk config/home/ryukk/.tmux.conf .tmux.conf
+COPY --chown=ryukk:ryukk config/home/ryukk/.tmux .tmux
 COPY --chown=ryukk:ryukk config/home/ryukk/.config .config
 COPY --chown=ryukk:ryukk config/home/ryukk/init.sh init.sh
 

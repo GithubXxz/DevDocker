@@ -2,8 +2,8 @@
 ### Clone and unzip 
 ```shell
 git clone ... 
-unzip config/home/ryukk/.tmux.zip -d config/home/ryukk/.tmux
-unzip config/home/ryukk/.config/zim.zip -d config/home/ryukk/.config/zim
+unzip config/home/ryukk/.tmux.zip -d config/home/ryukk/
+unzip config/home/ryukk/.config/zim.zip -d config/home/ryukk/.config/
 
 ```
 
@@ -76,7 +76,13 @@ docker run \
   --volume /sys/fs/cgroup:/sys/fs/cgroup:ro \
   --name=zhiqiangz-dev-test \
   --runtime=nvidia --gpus all \
-  --network host \
+  -e http_proxy="http://sys-proxy-rd-relay.byted.org:8118" \
+  -e https_proxy="http://sys-proxy-rd-relay.byted.org:8118" \
+  -e no_proxy="byted.org" \
   zhiqiangz-dev
+
+docker exec zhiqiangz-dev-test rm -f /var/run/nologin
+docker exec -it zhiqiangz-dev-test /bin/bash
+docker inspect zhiqiangz-dev-test
 
 ``` 
