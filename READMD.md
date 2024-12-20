@@ -2,8 +2,8 @@
 ### Clone and unzip 
 ```shell
 git clone ... 
-7z x config/home/ryukk/.tmux.7z -oconfig/home/ryukk/.tmux
-7z x config/home/ryukk/.config/zim.7z -oconfig/home/ryukk/.config/zim
+unzip config/home/ryukk/.tmux.zip -d config/home/ryukk/.tmux
+unzip config/home/ryukk/.config/zim.zip -d config/home/ryukk/.config/zim
 
 ```
 
@@ -66,10 +66,17 @@ sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 ### BUILD
 
 ```shell
-docker build \                           
-    --build-arg HTTP_PROXY="http://127.0.0.1:7890" \
-    --build-arg HTTPS_PROXY="http://127.0.0.1:7890" \
+docker build \
     -t zhiqiangz-dev \
     --network host \
     .
+
+docker run \
+  --privileged -d \
+  --volume /sys/fs/cgroup:/sys/fs/cgroup:ro \
+  --name=zhiqiangz-dev-test \
+  --runtime=nvidia --gpus all \
+  --network host \
+  zhiqiangz-dev
+
 ``` 

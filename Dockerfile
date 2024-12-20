@@ -1,4 +1,4 @@
-FROM ubuntu:jammy
+FROM hub.byted.org/base/ubuntu.jammy.tce_service:ea3648d8a7a13adad8eabb2a950cd043
 
 ENV container docker
 
@@ -19,8 +19,6 @@ RUN apt update ; \
     rm -f /lib/systemd/system/plymouth* ; \
     rm -f /lib/systemd/system/systemd-update-utmp*
 
-    
-COPY config/etc/apt/sources.list /etc/apt/sources.list
 RUN apt update && apt install -y --no-install-recommends \
     ca-certificates && update-ca-certificates
 
@@ -35,7 +33,6 @@ RUN apt install -y --no-install-recommends \
     git \
     zsh \
     vim 
-
 
 # install compiler toolchain
 RUN apt update && apt install -y --no-install-recommends \
