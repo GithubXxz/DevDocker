@@ -66,7 +66,7 @@ sudo docker run --rm --runtime=nvidia --gpus all ubuntu nvidia-smi
 ### BUILD
 
 ```shell
-docker build \                           
+docker build \
     --build-arg HTTP_PROXY="http://127.0.0.1:7890" \
     --build-arg HTTPS_PROXY="http://127.0.0.1:7890" \
     -t zhiqiangz-dev \
