@@ -1,0 +1,6 @@
+bak/
+test-config
+**/Draft.txt
+**/clean.sh
+config/home/ryukk/.tmux
+config/home/ryukk/.config/zim
